@@ -1,6 +1,14 @@
 # Savannah : Service Versioning And History
 
+Microservices don't exist without other services. Sooner or later you'll end up with lots services all interacting with each other.
+Keeping tabs on them isn't something that you usually think of when you get started. But eventually you'll need to. Which version of Service A is running in qa right now? What about Service A in production? Does Service B 1.0 work with Service A in qa? Can I see the historical view and the service dependencies? This is where Savannah comes in!
+
 Savannah keeps track of all API, build versions for services. 
+
+## How?
+Savannah is a rest API and keeps its records in a persistence layer (your choice). As it supports multiple environments/profile you don't need to have an instance of Savannah for each target, e.g. QA, Prod. 
+
+One simple way to notify Savannah of new versions of a service could be via the `@SavannahClient` annotation or via your CI pipeline (when you deploy your app you call the Savannah API).
 
 ## API
 Rest API
