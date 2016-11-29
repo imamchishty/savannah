@@ -5,10 +5,99 @@ Keeping tabs on them isn't something that you usually think of when you get star
 
 Savannah keeps track of all API, build versions for services. 
 
-## How?
-Savannah is a rest API and keeps its records in a persistence layer (your choice). As it supports multiple environments/profile you don't need to have an instance of Savannah for each target, e.g. QA, Prod. 
+## What?
+Savannah is a Server (with an API) that stores metadata about all of your services and profiles (environments e.g. qa, test). By default these 'records' are kept in memory but Savannah allow you to persist these however you feel best. The following diagram shows how it works from a high-level:
 
-One simple way to notify Savannah of new versions of a service could be via the `@SavannahClient` annotation or via your CI pipeline (when you deploy your app you call the Savannah API).
+
+Some quick benefits:
+  1. Central view of all services and their associated versions.
+  2. Can easily map out service hierarchy (most critical services etc).
+  3. Search for services and see where they're available (only at profile/env level).
+  4. Historical records.
+  5. Dependencies of all services, easy to see ordered deployments
+
+## Sample JSON
+```
+  {
+      "services": [
+          {
+              "service": "serviceA",
+              "description": "calculates interest",
+              "metadata": [
+                  {
+                      "team": "dubai1"
+                  },
+                  {
+                      "wiki": "serviceA.wiki.com"
+                  }
+              ]
+              "profiles": [
+                  {
+                      "profile": "dev",
+                      "build": "1.1.0.b12",
+                      "dateTime": "12:12:29 29/11/2016"
+                      "api": [
+                          "1.0",
+                          "1.1"
+                      ],
+                      "dependencies": [
+                          {
+                              "service": "serviceB",
+                              "api": [
+                                  "1.2"
+                              ]
+                          },
+                          {
+                              "service": "serviceC"
+                          }
+                      ]
+                  },
+                  {
+                      "profile": "test",
+                      "build": "1.1.0.b7",
+                      "dateTime": "17:06:18 21/11/2016"
+                      "api": [
+                          "1.0",
+                          "1.1"
+                      ],
+                      "dependencies": [
+                          {
+                              "service": "serviceB",
+                              "api": [
+                                  "1.1"
+                              ]
+                          },
+                          {
+                              "service": "serviceC"
+                          }
+                      ]
+                  },
+                  {
+                      "profile": "prod",
+                      "build": "1.0.0.b89",
+                      "dateTime": "19:26:48 02/11/2016"
+                      "api": [
+                          "1.0",
+                          "1.1"
+                      ],
+                      "dependencies": [
+                          {
+                              "service": "serviceB",
+                              "api": [
+                                  "1.0"
+                              ]
+                          },
+                          {
+                              "service": "serviceC"
+                          }
+                      ]
+                  }
+              ]
+          }
+      ]
+  }
+```
+
 
 ## API
 Rest API
