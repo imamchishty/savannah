@@ -1,4 +1,4 @@
-# Savannah : Service Versioning And History
+# Savannah (Service API Versioning And History)
 
 Microservices don't exist without other services. Sooner or later you'll end up with lots services all interacting with each other.
 Keeping tabs on them isn't something that you usually think of when you get started. But eventually you'll need to. Which version of Service A is running in qa right now? What about Service A in production? Does Service B 1.0 work with Service A in qa? Can I see the historical view and the service dependencies? This is where Savannah comes in!
