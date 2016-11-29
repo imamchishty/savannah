@@ -8,6 +8,13 @@ Savannah keeps track of all API, build versions for services.
 ## What?
 Savannah is a Server (with an API) that stores metadata about all of your services and profiles (environments e.g. qa, test). By default these 'records' are kept in memory but Savannah allow you to persist these however you feel best. The following diagram shows how it works from a high-level:
 
+![alt tag](https://github.com/imamchishty/savannah/blob/master/docs/savannah1.png)
+
+## Part of a pipeline
+
+![alt tag](https://github.com/imamchishty/savannah/blob/master/docs/savannah-pipeline-detail.png)
+
+## Benefits
 
 Some quick benefits:
   1. Central view of all services and their associated versions.
