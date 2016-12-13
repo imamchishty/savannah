@@ -1,18 +1,31 @@
-# Savannah (Service API Versioning And History)
+# Savannah (Service/Script API Versioning And History)
 
+## Service API Versioning And History
+### 1. Dependency Management
 Microservices don't exist without other services. Sooner or later you'll end up with lots services all interacting with each other.
 Keeping tabs on them isn't something that you usually think of when you get started. But eventually you'll need to. Which version of Service A is running in qa right now? What about Service A in production? Does Service B 1.0 work with Service A in qa? Can I see the historical view and the service dependencies? This is where Savannah comes in!
 
-Savannah keeps track of all API, build versions for services. 
+### 2. Deployments
+Savnnah can keep a track of all of your service deployments to any profile. The types of metadata which would be stored would include:
+__Service Version___
+__Profile__
+__SCM Revision__
+__Instances__
+__Dependencies__
 
-## What?
-Savannah is a Server (with an API) that stores metadata about all of your services and profiles (environments e.g. qa, test). By default these 'records' are kept in memory but Savannah allow you to persist these however you feel best. The following diagram shows how it works from a high-level:
+Using the REST API or even the UI you can see what services are currently deployed for a given profile. The default behaviour is to store these details in memory, however it is also possible to persist these records to the back end of your choice.
+
+
+## How?
 
 ![alt tag](https://github.com/imamchishty/savannah/blob/master/docs/savannah1.png)
 
-## Part of a pipeline
+### Part of a pipeline
 
 ![alt tag](https://github.com/imamchishty/savannah/blob/master/docs/savannah-pipeline-detail.png)
+
+### Using the provided Client
+A client library has been created to make it easy for Java apps to communicate with Savannah. When the service starts it sends dynamic details to Savannah.
 
 ## Benefits
 
@@ -147,3 +160,8 @@ Returns a historical view for the given profile.
 
 ### /savannah/ui/{appId}/{profile}/dependencies
 Returns a list of service depedencies that this app+profile has.
+
+
+## Script Version and History
+
+Infrastructure-as-code manage scripts, know where, when they've been applied.
