@@ -1,0 +1,41 @@
+spring:
+  profiles:
+    active: development
+  application:
+    name: savannah-server
+    version: 1.0.0
+
+server.port: 8080
+
+management.contextPath: /admin
+
+logging.level.: ERROR
+logging.level.com.shedhack.exception.controller.spring: ERROR
+logging.level.com.shedhack.trace.request: ERROR
+
+savannah.jpa.hibernate.hbm2ddl.auto: create
+savannah.jpa.hibernate.dialect: org.hibernate.dialect.H2Dialect
+
+# localhost:8080/console -- browse h2
+spring.h2.console.enabled: true
+spring.h2.console.path: /console/
+
+---
+spring:
+  profiles: development
+
+
+---
+spring:
+   profiles: test
+
+
+---
+spring:
+   profiles: production
+
+
+
+
+
+

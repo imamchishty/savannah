@@ -21,7 +21,6 @@ public class PingController {
     /**
      * Used to provide tools a HTTP 200 OK when service is running.
      */
-    @ThreadContext // writes to the xxx-audit.log
     @RequestMapping(path = ApiConstants.API_PING, method = RequestMethod.GET)
     public ResponseEntity<String> ping(){
         return new ResponseEntity<>(appName + " is running.....", HttpStatus.OK);

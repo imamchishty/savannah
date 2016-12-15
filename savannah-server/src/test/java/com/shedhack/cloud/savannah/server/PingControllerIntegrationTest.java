@@ -1,6 +1,5 @@
 package com.shedhack.cloud.savannah.server;
 
-import com.shedhack.cloud.savannah.server.Application;
 import com.shedhack.cloud.savannah.server.constant.ApiConstants;
 import org.junit.Test;
 import org.junit.runner.RunWith;

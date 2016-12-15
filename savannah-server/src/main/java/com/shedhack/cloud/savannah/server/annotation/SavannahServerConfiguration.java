@@ -1,7 +1,9 @@
-package com.shedhack.cloud.savannah.server;
+package com.shedhack.cloud.savannah.server.annotation;
 
 import com.google.gson.Gson;
 import com.shedhack.cloud.savannah.server.constant.ApiConstants;
+import com.shedhack.cloud.savannah.server.controller.HelpController;
+import com.shedhack.cloud.savannah.server.controller.PingController;
 import com.shedhack.exception.controller.spring.ExceptionInterceptor;
 import com.shedhack.exception.controller.spring.config.EnableExceptionController;
 import com.shedhack.spring.actuator.config.EnableActuatorsAndInterceptors;
@@ -12,14 +14,10 @@ import com.shedhack.trace.request.filter.DefaultTraceRequestInterceptor;
 import com.shedhack.trace.request.filter.RequestTraceFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.cloud.sleuth.Sampler;
-import org.springframework.cloud.sleuth.sampler.AlwaysSampler;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.PropertySources;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -34,15 +32,17 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * @author imamchishty
+ */
+@Configuration
 @SpringBootApplication
 @EnableSwagger2
 @EnableExceptionController
 @EnableThreadContextAspect
 @EnableActuatorsAndInterceptors
-@PropertySources(value = {
-        @PropertySource(value = "classpath:/git-build.properties")
-})
-public class Application extends WebMvcConfigurerAdapter {
+public class SavannahServerConfiguration extends WebMvcConfigurerAdapter {
+
 
     // --------------------
     // Bean configurations:
@@ -81,9 +81,18 @@ public class Application extends WebMvcConfigurerAdapter {
         return Arrays.asList(actuatorExceptionInterceptor);
     }
 
+    // -----------
+    // Controllers
+    // -----------
+
     @Bean
-    public Sampler defaultSampler() {
-        return new AlwaysSampler();
+    public HelpController helpController() {
+        return new HelpController();
+    }
+
+    @Bean
+    public PingController pingController() {
+        return new PingController();
     }
 
     // ---------------------------------------
@@ -112,7 +121,7 @@ public class Application extends WebMvcConfigurerAdapter {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.kungfu.panda.rest.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.shedhack.cloud.savannah.server"))
                 .paths(PathSelectors.any())
                 .build();
     }
@@ -126,15 +135,5 @@ public class Application extends WebMvcConfigurerAdapter {
                 .build();
     }
 
-    /**
-     * Future datasource beans need to marked with {@link org.springframework.context.annotation.Primary}.
-     * to prevent conflicts with the DS used by EnableTraceRequestJpa.
-     */
 
-    // ---------------------------
-    // Main method to start Spring
-    // ---------------------------
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-    }
 }
