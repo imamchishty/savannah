@@ -1,9 +1,11 @@
 package com.shedhack.cloud.savannah.server.annotation;
 
 import com.google.gson.Gson;
+import com.shedhack.cloud.savannah.core.service.SavannahService;
 import com.shedhack.cloud.savannah.server.constant.ApiConstants;
 import com.shedhack.cloud.savannah.server.controller.HelpController;
 import com.shedhack.cloud.savannah.server.controller.PingController;
+import com.shedhack.cloud.savannah.server.controller.SavannahController;
 import com.shedhack.exception.controller.spring.ExceptionInterceptor;
 import com.shedhack.exception.controller.spring.config.EnableExceptionController;
 import com.shedhack.spring.actuator.config.EnableActuatorsAndInterceptors;
@@ -93,6 +95,18 @@ public class SavannahServerConfiguration extends WebMvcConfigurerAdapter {
     @Bean
     public PingController pingController() {
         return new PingController();
+    }
+
+    @Autowired(required = false)
+    private SavannahService savannahService;
+
+    @Bean
+    public SavannahController savannahController() {
+
+        if(savannahService == null) {
+            // default to inmemory one
+        }
+        return new SavannahController(savannahService);
     }
 
     // ---------------------------------------
