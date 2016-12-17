@@ -6,19 +6,17 @@ import com.shedhack.cloud.savannah.core.model.ServiceInstance;
 import com.shedhack.cloud.savannah.core.service.SavannahService;
 import com.shedhack.cloud.savannah.jpa.repository.OrganisationRepository;
 import com.shedhack.cloud.savannah.jpa.repository.ServiceRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-@org.springframework.stereotype.Service
 public class SavannahServiceJPA implements SavannahService {
 
     private OrganisationRepository organisationRepository;
 
     private ServiceRepository serviceRepository;
 
-    public SavannahServiceJPA(@Autowired OrganisationRepository organisationRepository,
-                              @Autowired ServiceRepository serviceRepository) {
+    public SavannahServiceJPA(OrganisationRepository organisationRepository,
+                              ServiceRepository serviceRepository) {
 
         this.organisationRepository = organisationRepository;
         this.serviceRepository = serviceRepository;
@@ -48,7 +46,7 @@ public class SavannahServiceJPA implements SavannahService {
         return null;
     }
 
-    public void persist(com.shedhack.cloud.savannah.core.model.Service service) {
+    public void persist(Service service) {
 
     }
 
@@ -56,23 +54,23 @@ public class SavannahServiceJPA implements SavannahService {
 
     }
 
-    public void removeService(String service) {
+    public void removeService(String serviceId) {
 
     }
 
-    public void removeServiceInstance(ServiceInstance instanceModel) {
+    public void removeServiceInstance(String instanceId) {
 
     }
 
-    public com.shedhack.cloud.savannah.core.model.Service findService(String serviceId) {
+    public Service findService(String serviceId) {
         return null;
     }
 
-    public List<? extends com.shedhack.cloud.savannah.core.model.Service> findServicesForOrganisation(String organisationId) {
+    public List<? extends Service> findServicesForOrganisation(String organisationId) {
         return null;
     }
 
-    public List<? extends com.shedhack.cloud.savannah.core.model.Service> findAllServices(String organisation) {
+    public List<? extends Service> findAllServices(String organisationId) {
         return null;
     }
 
@@ -80,7 +78,7 @@ public class SavannahServiceJPA implements SavannahService {
 
     }
 
-    public ServiceInstance findInstance(String id) {
+    public ServiceInstance findInstance(String instanceId) {
         return null;
     }
 

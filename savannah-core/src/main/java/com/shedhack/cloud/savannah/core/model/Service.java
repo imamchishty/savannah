@@ -1,7 +1,8 @@
 package com.shedhack.cloud.savannah.core.model;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
+import java.util.Map;
 
 public interface Service extends Serializable {
 
@@ -10,13 +11,7 @@ public interface Service extends Serializable {
     // ---------
     String getId();
 
-    Organisation getOrganisation();
-
-    void setOrganisation(Organisation model);
-
-    String getName();
-
-    void setName(String name);
+    void setId(String id);
 
     String getTeam();
 
@@ -30,9 +25,17 @@ public interface Service extends Serializable {
 
     void setScm(String scm);
 
-    List<? extends ServiceInstance> getInstances();
+    Set<ServiceInstance> getInstances();
 
-    void setInstances(List<? extends ServiceInstance> instances);
+    void setInstances(Set<ServiceInstance> instances);
 
     void addInstance(ServiceInstance instance);
+
+    void removeInstance(ServiceInstance instance);
+
+    void setMetadata(Map<String, Object> map);
+
+    void addMetadata(String key, Object value);
+
+    Map<String, Object> getMetadata();
 }

@@ -1,5 +1,9 @@
 package com.shedhack.cloud.savannah.jpa.config;
 
+import com.shedhack.cloud.savannah.core.service.SavannahService;
+import com.shedhack.cloud.savannah.jpa.repository.OrganisationRepository;
+import com.shedhack.cloud.savannah.jpa.repository.ServiceRepository;
+import com.shedhack.cloud.savannah.jpa.service.SavannahServiceJPA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -49,6 +53,17 @@ public class SavannahJPAConfiguration {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
         return transactionManager;
+    }
+
+    @Autowired
+    private OrganisationRepository organisationRepository;
+
+    @Autowired
+    private ServiceRepository serviceRepository;
+
+    @Bean
+    public SavannahService savannahServiceJPA() {
+        return new SavannahServiceJPA(organisationRepository, serviceRepository);
     }
 
 }

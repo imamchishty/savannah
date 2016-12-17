@@ -10,16 +10,10 @@ public interface ServiceInstanceDependency extends Serializable {
     // ---------
     String getId();
 
-    ServiceInstance getServiceInstance();
+    void setId(String id);
 
-    void setServiceInstance(ServiceInstance serviceInstance);
+    String getApiVersion();
 
-    String getName();
-
-    void setName(String name);
-
-    ApiVersion getApiVersion();
-
-    void setApiVersion(ApiVersion apiVersion);
+    void setApiVersion(String apiVersion);
 
 }

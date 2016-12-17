@@ -19,6 +19,7 @@
         <module>savannah-server</module>
         <module>savannah-client</module>
         <module>savannah-jpa</module>
+        <module>savannah-ui</module>
     </modules>
 
     <packaging>pom</packaging>

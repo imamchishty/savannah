@@ -32,15 +32,15 @@ public interface SavannahService {
 
     void addInstanceToService(String serviceId, ServiceInstance instance);
 
-    void removeService(String service);
+    void removeService(String serviceId);
 
-    void removeServiceInstance(ServiceInstance instanceModel);
+    void removeServiceInstance(String instanceId);
 
     Service findService(String serviceId);
 
     List<? extends Service> findServicesForOrganisation(String organisationId);
 
-    List<? extends Service> findAllServices(String organisation);
+    List<? extends Service> findAllServices(String organisationId);
 
     // ----------------
     // Instance methods
@@ -48,7 +48,7 @@ public interface SavannahService {
 
     void persist(ServiceInstance instance);
 
-    ServiceInstance findInstance(String id);
+    ServiceInstance findInstance(String instanceId);
 
     List<? extends ServiceInstance> findInstancesByService(String serviceId);
 

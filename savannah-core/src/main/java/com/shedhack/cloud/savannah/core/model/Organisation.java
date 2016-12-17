@@ -1,46 +1,41 @@
 package com.shedhack.cloud.savannah.core.model;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 
 public interface Organisation extends Serializable {
 
-    // ---------
-    // Unique ID
-    // ---------
     String getId();
+
+    void setId(String id);
 
     // -------------
     // Field methods
     //--------------
 
-    String getName();
-
-    void setName(String name);
-
     String getDescription();
 
-    void setDescription(String name);
+    void setDescription(String description);
 
     // ---------------
     // Service methods
     // ---------------
 
-    List<? extends Service> getServices();
+    Set<Service> getServices();
 
     void addService(Service service);
 
-    void removeService(String service);
+    void removeService(Service service);
 
     // ---------------
     // Profile methods
     // ---------------
 
-    List<? extends Profile> getProfiles();
+    Set<Profile> getProfiles();
 
     void addProfile(Profile profile);
 
-    void removeProfile(String profile);
+    void removeProfile(Profile profile);
 
 }

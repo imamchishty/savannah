@@ -22,5 +22,5 @@ public class ApiConstants {
 
     public static final String API_MAN_HELP = API_MAN_ROOT + "/help";
 
-    public static final String API_SAVANNAH_ROOT = "/savannah";
+    public static final String API_SAVANNAH_ROOT = API_ROOT + "/savannah";
 }

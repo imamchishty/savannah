@@ -23,7 +23,14 @@ public class PingController {
      */
     @RequestMapping(path = ApiConstants.API_PING, method = RequestMethod.GET)
     public ResponseEntity<String> ping(){
+        System.out.println("-->POING");
         return new ResponseEntity<>(appName + " is running.....", HttpStatus.OK);
+    }
+
+    @RequestMapping(path = "/api/error", method = RequestMethod.GET)
+    public ResponseEntity<String> eping(){
+        System.out.println("-->POING");
+        throw new IllegalStateException("nejej");
     }
 
     public void setAppName(String appName) {

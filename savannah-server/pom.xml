@@ -35,33 +35,9 @@
         <!-- Shedhack -->
 
         <dependency>
-            <groupId>com.shedhack.trace</groupId>
-            <artifactId>trace-request-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.shedhack.trace</groupId>
-            <artifactId>trace-request-filter</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.shedhack.exception</groupId>
-            <artifactId>exception-controller-spring</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.shedhack.exception</groupId>
-            <artifactId>exception-core</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.shedhack.thread</groupId>
-            <artifactId>thread-context-aspect</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.shedhack.spring</groupId>
-            <artifactId>spring-actuator</artifactId>
+            <groupId>com.shedhack.tool</groupId>
+            <artifactId>spring-boost-enabler</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <!-- Spring -->

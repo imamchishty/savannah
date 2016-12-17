@@ -2,7 +2,8 @@ package com.shedhack.cloud.savannah.core.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
+import java.util.Map;
 
 public interface ServiceInstance extends Serializable {
 
@@ -11,21 +12,17 @@ public interface ServiceInstance extends Serializable {
     // ---------
     String getId();
 
-    String getName();
+    void setId(String id);
 
-    void setName(String name);
+    Set<ApiVersion> getApiVersions();
 
-    Service getService();
+    void setApiVersions(Set<ApiVersion> apiVersions);
 
-    void setService(Service service);
+    void addApiVersion(ApiVersion apiVersion);
 
-    List<? extends ApiVersion> getApiVersions();
+    Set<ServiceInstanceDependency> getDependencies();
 
-    void setApiVersions(List<? extends ApiVersion> apiVersions);
-
-    List<? extends ServiceInstanceDependency> getDependencies();
-
-    void setDependencies(List<? extends ServiceInstanceDependency> dependencies);
+    void setDependencies(Set<ServiceInstanceDependency> dependencies);
 
     void addDependency(ServiceInstanceDependency dependency);
 
@@ -65,4 +62,17 @@ public interface ServiceInstance extends Serializable {
 
     void setContainerImage(String containerImage);
 
+    String getBuildJob();
+
+    void setBuildJob(String ci);
+
+    String getBuildNo();
+
+    void setBuildNo(String ci);
+
+    void setMetadata(Map<String, Object> map);
+
+    void addMetadata(String key, Object value);
+
+    Map<String, Object> getMetadata();
 }

@@ -9,13 +9,7 @@ public interface Profile extends Serializable {
     // ---------
     String getId();
 
-    Organisation getOrganisation();
-
-    void setOrganisation(Organisation model);
-
-    String getName();
-
-    void setName(String name);
+    void setId(String id);
 
     String getDescription();
 
