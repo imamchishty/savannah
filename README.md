@@ -27,11 +27,11 @@ TODO add more details and diagram
 
 ## How?
 
-### Part of a pipeline
+### 1. Part of a pipeline
 
 ![alt tag](https://github.com/imamchishty/savannah/blob/master/docs/savannah-pipeline-detail.png)
 
-### Using the provided Client
+### 2. Using the provided Client
 A client library has been created to make it easy for Java apps to communicate with Savannah. When the service starts it sends dynamic details to Savannah.
 
 ## Benefits
@@ -149,26 +149,3 @@ Returns a list of service depedencies that this app+profile has.
 
 ## UI
 Visual view of the API
-
-### /savannah/ui/apps
-Returns a list of all registered apps.
-
-### /savannah/ui/apps/{appId}
-Returns all profiles for the app, e.g. production, qa etc.
-
-### /savannah/ui/apps/{appId}/{profile}
-Returns the selected apss profile details.
-
-### /savannah/ui/apps{appId}/history
-Returns a historical view of the versions for the given app.
-
-### /savannah/ui/apps/{appId}/{profile}/history
-Returns a historical view for the given profile.
-
-### /savannah/ui/{appId}/{profile}/dependencies
-Returns a list of service depedencies that this app+profile has.
-
-
-## Script Version and History
-
-Infrastructure-as-code manage scripts, know where, when they've been applied.
