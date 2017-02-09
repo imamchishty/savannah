@@ -6,36 +6,28 @@ import java.util.Map;
 
 public interface Service extends Serializable {
 
-    // ---------
-    // Unique ID
-    // ---------
-    String getId();
-
-    void setId(String id);
-
-    String getTeam();
-
-    void setTeam(String team);
+    // -------------
+    // Field methods
+    //--------------
 
     String getDescription();
 
+    String getName();
+
+    void setName(String name);
+
     void setDescription(String description);
-    
-    String getScm();
 
-    void setScm(String scm);
+    // ------------------------
+    // Service Instance methods
+    //-------------------------
 
-    Set<ServiceInstance> getInstances();
+    Set<? extends ServiceInstance> getInstances();
 
-    void setInstances(Set<ServiceInstance> instances);
+    void setInstances(Set<? extends ServiceInstance> instances);
 
     void addInstance(ServiceInstance instance);
 
     void removeInstance(ServiceInstance instance);
 
-    void setMetadata(Map<String, Object> map);
-
-    void addMetadata(String key, Object value);
-
-    Map<String, Object> getMetadata();
 }

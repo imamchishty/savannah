@@ -3,7 +3,6 @@ package com.shedhack.cloud.savannah.server.annotation;
 import com.shedhack.cloud.savannah.core.service.SavannahService;
 import com.shedhack.cloud.savannah.server.controller.HelpController;
 import com.shedhack.cloud.savannah.server.controller.PingController;
-import com.shedhack.cloud.savannah.server.controller.SavannahController;
 import com.shedhack.tool.spring.boost.EnableSpringBoost;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -34,13 +33,13 @@ public class SavannahServerConfiguration extends WebMvcConfigurerAdapter {
     @Autowired(required = false)
     private SavannahService savannahService;
 
-    @Bean
+    /*@Bean
     public SavannahController savannahController() {
 
         if(savannahService == null) {
             // default to inmemory one
         }
         return new SavannahController(savannahService);
-    }
+    }*/
 
 }

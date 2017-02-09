@@ -6,13 +6,13 @@ import java.util.Set;
 
 public interface Organisation extends Serializable {
 
-    String getId();
-
-    void setId(String id);
-
     // -------------
     // Field methods
     //--------------
+
+    String getName();
+
+    void setName(String name);
 
     String getDescription();
 
@@ -22,20 +22,10 @@ public interface Organisation extends Serializable {
     // Service methods
     // ---------------
 
-    Set<Service> getServices();
+    Set<? extends Service> getServices();
 
     void addService(Service service);
 
     void removeService(Service service);
-
-    // ---------------
-    // Profile methods
-    // ---------------
-
-    Set<Profile> getProfiles();
-
-    void addProfile(Profile profile);
-
-    void removeProfile(Profile profile);
 
 }

@@ -1,47 +1,37 @@
 package com.shedhack.cloud.savannah.jpa.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.shedhack.cloud.savannah.core.model.Organisation;
 import com.shedhack.cloud.savannah.core.model.Service;
 import com.shedhack.cloud.savannah.core.model.ServiceInstance;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "service")
 public class ServiceEntity implements Service {
 
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    private String id;
-
-    @ManyToOne
-    @JoinColumn(name = "organisation_id")
-    private OrganisationEntity organisation;
-
     private String name;
 
-    private String team;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "organisation_id", nullable = false)
+    private OrganisationEntity organisation;
 
     private String description;
 
-    private String scm;
-
     @OneToMany(mappedBy = "service")
-    private List<ServiceInstanceEntity> instances;
+    private Set<ServiceInstanceEntity> instances = new HashSet<>();
 
-    public String getId() {
-        return id;
-    }
+    // ---------------
+    // Entity methods
+    // ---------------
 
-    public Organisation getOrganisation() {
-        return organisation;
-    }
-
-    public void setOrganisation(Organisation organisation) {
-        this.organisation = (OrganisationEntity) organisation;
+    public String getDescription() {
+        return description;
     }
 
     public String getName() {
@@ -52,40 +42,40 @@ public class ServiceEntity implements Service {
         this.name = name;
     }
 
-    public String getTeam() {
-        return team;
-    }
-
-    public void setTeam(String team) {
-        this.team = team;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public String getScm() {
-        return scm;
-    }
-
-    public void setScm(String scm) {
-        this.scm = scm;
-    }
-
-    public List<ServiceInstanceEntity> getInstances() {
+    public Set<? extends ServiceInstance> getInstances() {
         return instances;
     }
 
-    public void setInstances(List<? extends ServiceInstance> instances) {
-        this.instances = (List<ServiceInstanceEntity>) instances;
+    public void setInstances(Set<? extends ServiceInstance> instances) {
+        this.instances = (Set<ServiceInstanceEntity>) instances;
     }
 
     public void addInstance(ServiceInstance instance) {
         this.instances.add((ServiceInstanceEntity) instance);
     }
 
+    public void removeInstance(ServiceInstance instance) {
+        this.instances.remove(instance);
+    }
+
+    public void setOrganisation(Organisation organisation) {
+        this.organisation = (OrganisationEntity) organisation;
+    }
+
+    public Organisation getOrganisation() {
+        return organisation;
+    }
+
+    @Override
+    public String toString() {
+        return "{\"ServiceEntity\":{"
+                + ", \"name\":\"" + name + "\""
+                + ", \"description\":\"" + description + "\""
+                + ", \"instances\":" + instances
+                + "}}";
+    }
 }

@@ -7,19 +7,19 @@ public class DefaultProfile implements Profile {
     public DefaultProfile() {
     }
 
-    public DefaultProfile(String id, String description) {
-        this.id = id;
+    public DefaultProfile(String name, String description) {
+        this.name = name;
         this.description = description;
     }
 
-    private String id, description;
+    private String name, description;
 
-    public String getId() {
-        return id;
+    public String getName() {
+        return name;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
@@ -30,30 +30,4 @@ public class DefaultProfile implements Profile {
         this.description = description;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        DefaultProfile that = (DefaultProfile) o;
-
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        return description != null ? description.equals(that.description) : that.description == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "{\"DefaultProfile\":{"
-                + "\"id\":\"" + id + "\""
-                + ", \"description\":\"" + description + "\""
-                + "}}";
-    }
 }

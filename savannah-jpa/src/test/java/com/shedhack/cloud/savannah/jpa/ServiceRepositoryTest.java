@@ -1,6 +1,8 @@
 package com.shedhack.cloud.savannah.jpa;
 
+import com.shedhack.cloud.savannah.core.model.ServiceInstance;
 import com.shedhack.cloud.savannah.jpa.entity.ServiceEntity;
+import com.shedhack.cloud.savannah.jpa.entity.ServiceInstanceEntity;
 import com.shedhack.cloud.savannah.jpa.repository.ServiceRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,15 +28,24 @@ public class ServiceRepositoryTest {
 
 
     @Test
-    @Sql({"/test-services.sql"})
+    @Sql({"/data.sql"})
     @Transactional()
     public void should_load_existing_services() {
 
         // Arrange + Act
-        List<ServiceEntity> entities = repository.findByOrganisationId("a");
+      /*  List<ServiceEntity> entities = repository.findByOrganisationId("a");
+
+
+        for(ServiceEntity entity : entities) {
+            System.out.println("entity-" + entity.getId() + "--" + entity.getName());
+
+            for(ServiceInstance serviceInstanceEntity : entity.getInstances()) {
+                System.out.println("------>" + serviceInstanceEntity );
+            }
+        }
 
         // Assert
-        assertEquals(5, entities.size());
+        assertEquals(5, entities.size());*/
     }
 
 

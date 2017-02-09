@@ -3,36 +3,26 @@ package com.shedhack.cloud.savannah.core.model;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
-import java.util.Map;
 
 public interface ServiceInstance extends Serializable {
 
-    // ---------
-    // Unique ID
-    // ---------
+    // -------------
+    // Field methods
+    //--------------
+
     String getId();
 
     void setId(String id);
 
-    Set<ApiVersion> getApiVersions();
+    Set<? extends Api> getApis();
 
-    void setApiVersions(Set<ApiVersion> apiVersions);
+    void setApis(Set<? extends Api> apiVersions);
 
-    void addApiVersion(ApiVersion apiVersion);
+    void addApi(Api apiVersion);
 
-    Set<ServiceInstanceDependency> getDependencies();
+    String getArtifactVersion();
 
-    void setDependencies(Set<ServiceInstanceDependency> dependencies);
-
-    void addDependency(ServiceInstanceDependency dependency);
-
-    String getVersion();
-
-    void setVersion(String version);
-
-    String getScmRevision();
-
-    void setScmRevision(String scmRevision);
+    void setArtifactVersion(String version);
 
     Date getDateTime();
 
@@ -42,21 +32,9 @@ public interface ServiceInstance extends Serializable {
 
     void setProfile(Profile profile);
 
-    String getStatus();
+    String getUrl();
 
-    void setStatus(String status);
-
-    String getExecutor();
-
-    void setExecutor(String executor);
-
-    String getHost();
-
-    void setHost(String host);
-
-    int getPort();
-
-    void setPort(int port);
+    void setUrl(String url);
 
     String getContainerImage();
 
@@ -70,9 +48,14 @@ public interface ServiceInstance extends Serializable {
 
     void setBuildNo(String ci);
 
-    void setMetadata(Map<String, Object> map);
+    // -----------------------------------
+    // Service Instance Dependency methods
+    //------------------------------------
 
-    void addMetadata(String key, Object value);
+    Set<? extends Dependency> getDependencies();
 
-    Map<String, Object> getMetadata();
+    void setDependencies(Set<? extends Dependency> dependencies);
+
+    void addDependency(Dependency dependency);
+
 }

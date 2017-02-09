@@ -4,12 +4,9 @@ import java.io.Serializable;
 
 public interface Profile extends Serializable {
 
-    // ---------
-    // Unique ID
-    // ---------
-    String getId();
+    String getName();
 
-    void setId(String id);
+    void setName(String name);
 
     String getDescription();
 

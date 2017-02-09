@@ -1,8 +1,7 @@
 package com.shedhack.cloud.savannah.jpa.config;
 
 import com.shedhack.cloud.savannah.core.service.SavannahService;
-import com.shedhack.cloud.savannah.jpa.repository.OrganisationRepository;
-import com.shedhack.cloud.savannah.jpa.repository.ServiceRepository;
+import com.shedhack.cloud.savannah.jpa.repository.*;
 import com.shedhack.cloud.savannah.jpa.service.SavannahServiceJPA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -23,37 +22,7 @@ import java.util.HashMap;
  */
 @Configuration
 @EnableJpaRepositories(basePackages = "com.shedhack.cloud.savannah.jpa")
-@EnableTransactionManagement
 public class SavannahJPAConfiguration {
-
-    @Autowired
-    private DataSource dataSource;
-
-    @Autowired
-    private Environment env;
-
-    @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(dataSource);
-        em.setPackagesToScan(new String[] { "com.shedhack.cloud.savannah.jpa" });
-
-        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        em.setJpaVendorAdapter(vendorAdapter);
-        HashMap<String, Object> properties = new HashMap<>();
-        properties.put("hibernate.hbm2ddl.auto", env.getProperty("savannah.jpa.hibernate.hbm2ddl.auto"));
-        properties.put("hibernate.dialect", env.getProperty("savannah.jpa.hibernate.dialect"));
-        em.setJpaPropertyMap(properties);
-
-        return em;
-    }
-
-    @Bean
-    public PlatformTransactionManager transactionManager() {
-        JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
-        return transactionManager;
-    }
 
     @Autowired
     private OrganisationRepository organisationRepository;
@@ -61,9 +30,19 @@ public class SavannahJPAConfiguration {
     @Autowired
     private ServiceRepository serviceRepository;
 
+    @Autowired
+    private ServiceInstanceRepository serviceInstanceRepository;
+
+    @Autowired
+    private ProfileRepository profileRepository;
+
+    @Autowired
+    private DependencyRepository dependencyRepository;
+
     @Bean
     public SavannahService savannahServiceJPA() {
-        return new SavannahServiceJPA(organisationRepository, serviceRepository);
+        return new SavannahServiceJPA(organisationRepository, serviceRepository,
+                serviceInstanceRepository, profileRepository, dependencyRepository);
     }
 
 }

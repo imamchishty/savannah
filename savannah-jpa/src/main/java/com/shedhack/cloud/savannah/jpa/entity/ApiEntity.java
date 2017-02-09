@@ -1,14 +1,15 @@
 package com.shedhack.cloud.savannah.jpa.entity;
 
-import com.shedhack.cloud.savannah.core.model.ApiVersion;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.shedhack.cloud.savannah.core.model.Api;
 import com.shedhack.cloud.savannah.core.model.ServiceInstance;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "api_version")
-public class ApiVersionEntity implements ApiVersion {
+@Table(name = "service_instance_api")
+public class ApiEntity implements Api {
 
     @Id
     @GeneratedValue(generator = "uuid2")
@@ -19,6 +20,7 @@ public class ApiVersionEntity implements ApiVersion {
 
     private String description;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "instance_id")
     private ServiceInstanceEntity instance;
@@ -27,11 +29,15 @@ public class ApiVersionEntity implements ApiVersion {
         return id;
     }
 
-    public void setApiVersion(String version) {
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setVersion(String version) {
         this.version = version;
     }
 
-    public String getApiVersion() {
+    public String getVersion() {
         return version;
     }
 
@@ -51,4 +57,12 @@ public class ApiVersionEntity implements ApiVersion {
         this.instance = (ServiceInstanceEntity) instance;
     }
 
+    @Override
+    public String toString() {
+        return "{\"ApiEntity\":{"
+                + "\"id\":\"" + id + "\""
+                + ", \"version\":\"" + version + "\""
+                + ", \"description\":\"" + description + "\""
+                + "}}";
+    }
 }

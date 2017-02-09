@@ -1,11 +1,13 @@
 package com.shedhack.cloud.savannah.jpa.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.shedhack.cloud.savannah.core.model.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "service_instance")
@@ -16,89 +18,66 @@ public class ServiceInstanceEntity implements ServiceInstance {
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     private String id;
 
-    private String name;
-
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "service_id")
+    @JoinColumn(name = "service_id", nullable = false)
     private ServiceEntity service;
 
     @OneToMany(mappedBy = "instance")
-    private List<ApiVersionEntity> apiVersions;
+    private Set<ApiEntity> apiVersions = new HashSet<>();
 
     @OneToMany(mappedBy = "instance")
-    private List<ServiceInstanceDependencyEntity> dependencies;
-
-    @Column(name = "scm_revision")
-    private String scmRevision;
+    private Set<DependencyEntity> dependencies = new HashSet<>();
 
     @Column(name = "container_image")
     private String containerImage;
 
-    private String version, status, executor, host;
+    private String version, url;
 
     @ManyToOne
     @JoinColumn(name = "profile_id")
     private ProfileEntity profile;
 
     @Column(name = "date_time")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateTime;
 
-    private int port;
+    @Column(name = "build_number")
+    private String buildNo;
+
+    @Column(name = "build_job")
+    private String buildJob;
+
+    // ---------------
+    // Entity methods
+    // ---------------
 
     public String getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Service getService() {
-        return service;
-    }
-
-    public void setService(Service service) {
-        this.service = (ServiceEntity) service;
-    }
-
-    public List<ApiVersionEntity> getApiVersions() {
+    public Set<? extends Api> getApis() {
         return apiVersions;
     }
 
-    public void setApiVersions(List<? extends ApiVersion> apiVersions) {
-        this.apiVersions = (List<ApiVersionEntity>) apiVersions;
+    public void setApis(Set<? extends Api> apiVersions) {
+        this.apiVersions = (Set<ApiEntity>) apiVersions;
     }
 
-    public List<ServiceInstanceDependencyEntity> getDependencies() {
-        return dependencies;
+    public void addApi(Api apiVersion) {
+        this.apiVersions.add((ApiEntity) apiVersion);
     }
 
-    public void setDependencies(List<? extends ServiceInstanceDependency> dependencies) {
-        this.dependencies = (List<ServiceInstanceDependencyEntity>) dependencies;
-    }
-
-    public void addDependency(ServiceInstanceDependency dependency) {
-        this.dependencies.add((ServiceInstanceDependencyEntity) dependency);
-    }
-
-    public String getVersion() {
+    public String getArtifactVersion() {
         return version;
     }
 
-    public void setVersion(String version) {
+    public void setArtifactVersion(String version) {
         this.version = version;
-    }
-
-    public String getScmRevision() {
-        return scmRevision;
-    }
-
-    public void setScmRevision(String scmRevision) {
-        this.scmRevision = scmRevision;
     }
 
     public Date getDateTime() {
@@ -117,36 +96,12 @@ public class ServiceInstanceEntity implements ServiceInstance {
         this.profile = (ProfileEntity) profile;
     }
 
-    public String getStatus() {
-        return status;
+    public String getUrl() {
+        return url;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getExecutor() {
-        return executor;
-    }
-
-    public void setExecutor(String executor) {
-        this.executor = executor;
-    }
-
-    public String getHost() {
-        return host;
-    }
-
-    public void setHost(String host) {
-        this.host = host;
-    }
-
-    public int getPort() {
-        return port;
-    }
-
-    public void setPort(int port) {
-        this.port = port;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getContainerImage() {
@@ -157,4 +112,55 @@ public class ServiceInstanceEntity implements ServiceInstance {
         this.containerImage = containerImage;
     }
 
+    public String getBuildJob() {
+        return this.buildJob;
+    }
+
+    public void setBuildJob(String ci) {
+        this.buildJob = ci;
+    }
+
+    public String getBuildNo() {
+        return this.buildNo;
+    }
+
+    public void setBuildNo(String ci) {
+        this.buildNo = ci;
+    }
+
+    public Set<? extends DependencyEntity> getDependencies() {
+        return dependencies;
+    }
+
+    public void setDependencies(Set<? extends Dependency> dependencies) {
+        this.dependencies = (Set<DependencyEntity>) dependencies;
+    }
+
+    public void addDependency(Dependency dependency) {
+        this.dependencies.add((DependencyEntity) dependency);
+    }
+
+    public Service getService() {
+        return service;
+    }
+
+    public void setService(Service service) {
+        this.service = (ServiceEntity) service;
+    }
+
+    @Override
+    public String toString() {
+        return "{\"ServiceInstanceEntity\":{"
+                + "\"id\":\"" + id + "\""
+                + ", \"apiVersions\":" + apiVersions
+                + ", \"dependencies\":" + dependencies
+                + ", \"containerImage\":\"" + containerImage + "\""
+                + ", \"version\":\"" + version + "\""
+                + ", \"url\":\"" + url + "\""
+                + ", \"profile\":" + profile
+                + ", \"dateTime\":" + dateTime
+                + ", \"buildNo\":\"" + buildNo + "\""
+                + ", \"buildJob\":\"" + buildJob + "\""
+                + "}}";
+    }
 }

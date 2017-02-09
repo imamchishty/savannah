@@ -1,39 +1,19 @@
 package com.shedhack.cloud.savannah.jpa.entity;
 
-import com.shedhack.cloud.savannah.core.model.Organisation;
 import com.shedhack.cloud.savannah.core.model.Profile;
-import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "profile")
 public class ProfileEntity implements Profile {
 
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    private String id;
-
-    @ManyToOne
-    @JoinColumn(name = "organisation_id")
-    private OrganisationEntity organisation;
-
     private String name;
 
     private String description;
-
-    public String getId() {
-        return id;
-    }
-
-    public Organisation getOrganisation() {
-        return organisation;
-    }
-
-    public void setOrganisation(Organisation organisation) {
-        this.organisation = (OrganisationEntity) organisation;
-    }
 
     public String getName() {
         return name;
@@ -51,4 +31,11 @@ public class ProfileEntity implements Profile {
         this.description = description;
     }
 
+    @Override
+    public String toString() {
+        return "{\"ProfileEntity\":{"
+                + ", \"name\":\"" + name + "\""
+                + ", \"description\":\"" + description + "\""
+                + "}}";
+    }
 }

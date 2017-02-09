@@ -1,18 +1,35 @@
 package com.shedhack.cloud.savannah.core.service;
 
-import com.shedhack.cloud.savannah.core.model.Organisation;
-import com.shedhack.cloud.savannah.core.model.ServiceInstance;
-import com.shedhack.cloud.savannah.core.model.Service;
+import com.shedhack.cloud.savannah.core.model.*;
 
+import java.util.Date;
 import java.util.List;
 
 public interface SavannahService {
+
+    // ---------------
+    // Profile methods
+    // ---------------
+
+    List<? extends Profile> findAllProfiles();
+
+    List<? extends Profile> findProfile(String profileId);
+
+    Profile saveProfile(Profile profile);
+
+    void removeProfile(String profileId);
+
+    void removeAllProfiles();
 
     // --------------------
     // Organisation methods
     // --------------------
 
-    void persist(Organisation organisation);
+    List<? extends Organisation> findAllOrganisations();
+
+    Organisation findOrganisation(String organisationId);
+
+    Organisation saveOrganisation(Organisation organisation);
 
     void addServiceToOrganisation(String organisationId, Service service);
 
@@ -20,44 +37,67 @@ public interface SavannahService {
 
     void removeAllOrganisations();
 
-    Organisation findOrganisation(String organisationId);
-
-    List<? extends Organisation> findAllOrganisations();
-
     // ---------------
     // Service methods
     // ---------------
 
-    void persist(Service service);
+    List<? extends Service> findAllServices();
+
+    Service findService(String serviceId);
+
+    List<? extends Service> findServicesByOrganisation(String organisationId);
+
+    Service saveService(String organisationId, Service service);
 
     void addInstanceToService(String serviceId, ServiceInstance instance);
 
     void removeService(String serviceId);
 
+    void removeAllServices();
+
+    // ------------------------
+    // Service instance methods
+    // ------------------------
+
+    List<? extends ServiceInstance> findAllServiceInstances();
+
+    ServiceInstance findServiceInstance(String instanceId);
+
+    List<? extends ServiceInstance> findServiceInstancesByService(String serviceId);
+
+    List<? extends ServiceInstance> findServiceInstancesByProfile(String profileId);
+
+    List<? extends ServiceInstance> findServiceInstancesByServiceAndProfile(String serviceId, String profileId);
+
+    List<? extends ServiceInstance> findServiceInstancesByServiceAndDate(String serviceId, Date start, Date end);
+
+    ServiceInstance saveServiceInstance(String serviceId, ServiceInstance instance);
+
     void removeServiceInstance(String instanceId);
 
-    Service findService(String serviceId);
+    void removeAllServiceInstances();
 
-    List<? extends Service> findServicesForOrganisation(String organisationId);
+    // ------------------
+    // Dependency methods
+    // ------------------
 
-    List<? extends Service> findAllServices(String organisationId);
+    List<? extends Dependency> findAllDependencies();
 
-    // ----------------
-    // Instance methods
-    // ----------------
+    Dependency findDependency(String name, String version);
 
-    void persist(ServiceInstance instance);
+    List<? extends Dependency> findDependencyByName(String name);
 
-    ServiceInstance findInstance(String instanceId);
+    List<? extends Dependency> findDependencyByServiceInstance(String serviceInstanceId);
 
-    List<? extends ServiceInstance> findInstancesByService(String serviceId);
+    List<? extends Service> findDependencyByService(String serviceId);
 
-    List<? extends ServiceInstance> findInstancesByStatus(String serviceId, String status);
+    List<? extends ServiceInstance> findServiceInstancesByDependencyName(String dependency);
 
-    // ----------------
-    // Profile methods
-    // ----------------
+    Dependency saveDependency(Dependency dependency);
 
-    List<? extends ServiceInstance> findInstancesByProfile(String organisationId, String profileId);
+    void saveDependencies(List<? extends Dependency> dependencies);
 
+    void removeDependency(String name, String version);
+
+    void removeAllDependencies();
 }
