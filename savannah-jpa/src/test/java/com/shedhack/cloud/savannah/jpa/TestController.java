@@ -50,8 +50,8 @@ public class TestController {
     }
 
     @ThreadContext
-    @RequestMapping(value = "/profiles", method = RequestMethod.DELETE)
-    public void removeProfile(String profileId) {
+    @RequestMapping(value = "/profiles/{profileId}", method = RequestMethod.DELETE)
+    public void removeProfile(@PathVariable String profileId) {
         savannahService.removeProfile(profileId);
     }
 
@@ -66,19 +66,19 @@ public class TestController {
     // --------------------
 
     @ThreadContext
-    @RequestMapping(value = "/profiles", method = RequestMethod.GET)
+    @RequestMapping(value = "/organisations", method = RequestMethod.GET)
     public List<? extends Organisation> findAllOrganisations() {
         return savannahService.findAllOrganisations();
     }
 
     @ThreadContext
-    @RequestMapping(value = "/profiles", method = RequestMethod.GET)
-    public Organisation findOrganisation(String organisationId) {
+    @RequestMapping(value = "/organisations/{organisationId}", method = RequestMethod.GET)
+    public Organisation findOrganisation(@PathVariable String organisationId) {
         return savannahService.findOrganisation(organisationId);
     }
 
     @ThreadContext
-    @RequestMapping(value = "/profiles", method = RequestMethod.POST)
+    @RequestMapping(value = "/organisations", method = RequestMethod.POST)
     public Organisation saveOrganisation(Organisation organisation) {
         return savannahService.saveOrganisation(organisation);
     }
@@ -248,7 +248,7 @@ public class TestController {
     @ThreadContext
     @RequestMapping(value = "/profiles", method = RequestMethod.POST)
     public Dependency saveDependency(Dependency dependency) {
-        savannahService.saveDependency(dependency);
+        return savannahService.saveDependency(dependency);
     }
 
     @ThreadContext
