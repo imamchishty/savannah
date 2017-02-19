@@ -1,29 +1,25 @@
-# Savannah (Service/Script API Versioning And History)
-
-Savannah provides three core facilities.
+# Savannah (Service API Versioning And History)
 
 ## Service API Versioning And History
-### 1. Dependency Management
+### Dependency Management
 Microservices don't exist without other services. Sooner or later you'll end up with lots services all interacting with each other.
 Keeping tabs on them isn't something that you usually think of when you get started. But eventually you'll need to. Which version of Service A is running in qa right now? What about Service A in production? Does Service B 1.0 work with Service A in qa? Can I see the historical view and the service dependencies? This is where Savannah comes in!
 
+The types of dependencies you have will not be limited to just external services. They will also include:
+__Libraries__: internal dependencies, such as jars.
+__Scripts__: scripts required to be executed to 'do stuff' for the service to run.
+__Database__: database/nosql changes required.
+__Config__: yml, properties files etc.
+
+## High-level
+
 ![alt tag](https://github.com/imamchishty/savannah/blob/master/docs/savannah1.png)
 
-### 2. Deployments
-Savnnah can keep a track of all of your service deployments to any profile. The types of metadata which would be stored would include:
-__Service Version___
-__Profile__
-__SCM Revision__
-__Instances__
-__Dependencies__
+## Dependencies
 
-Using the REST API or even the UI you can see what services are currently deployed for a given profile. The default behaviour is to store these details in memory, however it is also possible to persist these records to the back end of your choice.
+![alt tag](https://github.com/imamchishty/savannah/blob/master/docs/savannah-dependencies.png)
 
-### 3. Infrastructure As Code
-As we move to a world where scripts are treated with the same respect as usual code you'll need to keep a track of what has been applied, where, was it succesful etc. Savannah provides the ability to do this. 
-
-TODO add more details and diagram
-
+![alt tag](https://github.com/imamchishty/savannah/blob/master/docs/savannah-push.png)
 
 ## How?
 
