@@ -15,6 +15,8 @@ public class DependencyPK implements Serializable {
         this.setVersion(version);
     }
 
+    public DependencyPK(){}
+
     public String getName() {
         return name;
     }

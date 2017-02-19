@@ -1,7 +1,7 @@
 # Savannah (Service API Versioning And History)
 
 
-[![Build Status](https://travis-ci.org/imamchishty/exception-core.svg?branch=master "Travis CI")](https://travis-ci.org/imamchishty/savannah) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.shedhack.cloud/savannah-server/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/com.shedhack.cloud/savannah-server) 
+[![Build Status](https://travis-ci.org/imamchishty/savannah.svg?branch=master "Travis CI")](https://travis-ci.org/imamchishty/savannah) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.shedhack.cloud/savannah-server/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/com.shedhack.cloud/savannah-server) 
 
 ## Service API Versioning And History
 ### Dependency Management
