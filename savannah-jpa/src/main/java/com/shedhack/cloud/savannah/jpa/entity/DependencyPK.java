@@ -10,6 +10,11 @@ public class DependencyPK implements Serializable {
 
     private String version;
 
+    public DependencyPK(String name, String version) {
+        this.setName(name);
+        this.setVersion(version);
+    }
+
     public String getName() {
         return name;
     }

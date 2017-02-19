@@ -31,7 +31,7 @@ public interface SavannahService {
 
     Organisation saveOrganisation(Organisation organisation);
 
-    void addServiceToOrganisation(String organisationId, Service service);
+    Service addServiceToOrganisation(String organisationId, Service service);
 
     void removeOrganisation(String organisationId);
 
@@ -47,9 +47,9 @@ public interface SavannahService {
 
     List<? extends Service> findServicesByOrganisation(String organisationId);
 
-    Service saveService(String organisationId, Service service);
+    Service saveService(Service service);
 
-    void addInstanceToService(String serviceId, ServiceInstance instance);
+    ServiceInstance addInstanceToService(String serviceId, ServiceInstance instance);
 
     void removeService(String serviceId);
 
@@ -71,7 +71,7 @@ public interface SavannahService {
 
     List<? extends ServiceInstance> findServiceInstancesByServiceAndDate(String serviceId, Date start, Date end);
 
-    ServiceInstance saveServiceInstance(String serviceId, ServiceInstance instance);
+    ServiceInstance saveServiceInstance(ServiceInstance instance);
 
     void removeServiceInstance(String instanceId);
 
@@ -88,8 +88,6 @@ public interface SavannahService {
     List<? extends Dependency> findDependencyByName(String name);
 
     List<? extends Dependency> findDependencyByServiceInstance(String serviceInstanceId);
-
-    List<? extends Service> findDependencyByService(String serviceId);
 
     List<? extends ServiceInstance> findServiceInstancesByDependencyName(String dependency);
 

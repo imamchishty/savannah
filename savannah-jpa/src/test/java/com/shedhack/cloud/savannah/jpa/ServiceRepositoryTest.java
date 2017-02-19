@@ -19,6 +19,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * @author imamchishty
  */
+@Transactional
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = Application.class)
 public class ServiceRepositoryTest {
@@ -28,8 +29,7 @@ public class ServiceRepositoryTest {
 
 
     @Test
-    @Sql({"/data.sql"})
-    @Transactional()
+    //@Sql({"/data.sql"})
     public void should_load_existing_services() {
 
         // Arrange + Act
